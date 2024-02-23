@@ -123,6 +123,8 @@ elif app_mode == 'Translator':
     
     ''')
     st.markdown("----------")
+
+    err_text = st.markdown("")
     
     frame_placeholder = st.empty()
 
@@ -201,13 +203,17 @@ elif app_mode == 'Translator':
                 x2 = int(max(x_) * W) - 10
                 y2 = int(max(y_) * H) - 10
 
+                prediction = []
+
                 try:
                     prediction = model.predict([np.asarray(data_aux)])
+                    predicted_character = labels_dict[int(prediction[0])]
                 except:
+                    err_text.write(f"<h1 style='text-align: center; border-style:solid; padding: 5px; color: #FF0000'>Please Remove Second Hand From Frame</h1>", unsafe_allow_html=True)
                     print("err")
 
 
-                predicted_character = labels_dict[int(prediction[0])]
+                
 
 
                 cv2.rectangle(frame, (x1, y1), (x2, y2),(154, 86, 81), 4)
@@ -291,7 +297,7 @@ elif app_mode == 'Learn':
         st.markdown("---")
         
         
-
+        err_text = st.markdown("")
 
         frame_placeholder = st.empty()
 
@@ -375,13 +381,15 @@ elif app_mode == 'Learn':
                     x2 = int(max(x_) * W) - 10
                     y2 = int(max(y_) * H) - 10
 
+                    prediction = []
+
                     try:
                         prediction = model.predict([np.asarray(data_aux)])
+                        predicted_character = labels_dict[int(prediction[0])]
                     except:
+                        err_text.write(f"<h1 style='text-align: center; border-style:solid; padding: 5px; color: #FF0000'>Please Remove Second Hand From Frame</h1>", unsafe_allow_html=True)
                         print("err")
 
-
-                    predicted_character = labels_dict[int(prediction[0])]
 
 
 
